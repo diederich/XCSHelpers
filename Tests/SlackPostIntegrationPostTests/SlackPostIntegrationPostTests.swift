@@ -24,21 +24,49 @@ final class SlackPostIntegrationIntegrationPostTests: XCTestCase {
 
   // MARK: - Tests
   func testEmptyEnvironment() throws {
+    sut.arguments = [ "https://slack.hook.url" ]
     try runProcess()
 
-    XCTAssertEqual(sut.terminationStatus, 1)
+    XCTAssertEqual(sut.terminationStatus, 2)
     XCTAssertFalse(stringFromOutput(errorOutputPipe).isEmpty, "Should've printed to stderr")
   }
 
-  func testSuccessfulRun() throws {
+  // disabled - requires proper slack URL
+  func disabled_testSuccessfulRun() throws {
+    sut.arguments = [ "https://slack.hook.url", "--hostname", "minion.local"]
     sut.environment = [
-      "XCS" : "1",
-      "XCS_BOT_NAME" : "TestBot"
+      "XCS_XCODEBUILD_LOG": "/xxx/xcodebuild.log",
+      "XCS_PRODUCT": "/xxx/Xbuddy.ipa",
+      "XCS_PRIMARY_REPO_BRANCH": "master",
+      "XCS_ERROR_COUNT": "0",
+      "XCS_ANALYZER_WARNING_COUNT": "0",
+      "XCS_TESTS_CHANGE": "-1",
+      "XPC_SERVICE_NAME": "0",
+      "XCS_ERROR_CHANGE": "0",
+      "XCS_DERIVED_DATA_DIR": "/xxx/DerivedData",
+      "XCS_ANALYZER_WARNING_CHANGE": "0",
+      "XCS_WARNING_COUNT": "2",
+      "XCS_TESTS_COUNT": "28",
+      "XCS_OUTPUT_DIR": "/xxx/Integration-ec435d6b029240f17f72d78c1165aeac",
+      "XCS_INTEGRATION_NUMBER": "56",
+      "XCS_BOT_NAME": "TestBot",
+      "XCS": "1",
+      "XCS_WARNING_CHANGE": "0",
+      "XCS_SOURCE_DIR": "/xxx/843075fd656bb8509177f6cd1d142896/Source",
+      "XCS_INTEGRATION_RESULT": "warnings",
+      "XCS_TEST_FAILURE_COUNT": "0",
+      "XCS_INTEGRATION_ID": "ec435d6b029240f17f72d78c1165aeac",
+      "XCS_BOT_ID": "843075fd656bb8509177f6cd1d142896",
+      "XCS_BOT_TINY_ID": "0D7902C",
+      "XCS_ARCHIVE": "/xxx/Integration-ec435d6b029240f17f72d78c1165aeac/Xbuddy.xcarchive",
+      "XCS_TEST_FAILURE_CHANGE": "0",
+      "XCS_INTEGRATION_TINY_ID": "91D6155",
+      "XCS_PRIMARY_REPO_DIR": "/xxx/XCSBuilder/Bots/843075fd656bb8509177f6cd1d142896/Source/Xbuddy",
     ]
     try runProcess()
 
     XCTAssertEqual(sut.terminationStatus, 0)
-    XCTAssertTrue(stringFromOutput(errorOutputPipe).isEmpty, "Should've printed to stderr")
+    XCTAssertEqual(stringFromOutput(errorOutputPipe), "", "Should've not printed to stderr")
     let output = stringFromOutput(standardOutputPipe)
     XCTAssertTrue(output.contains("TestBot"), "Should've echoed botname to stdout")
   }
@@ -70,7 +98,6 @@ final class SlackPostIntegrationIntegrationPostTests: XCTestCase {
   }
 
   static var allTests = [
-    ("testSuccessfulRun", testSuccessfulRun),
     ("testEmptyEnvironment", testEmptyEnvironment),
     ]
 }

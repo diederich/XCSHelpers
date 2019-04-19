@@ -36,12 +36,15 @@ extension SlackPost {
     }
     //TODO should the username be the 'server' and the author the bot?
     let botname = env[.XCS_BOT_NAME] ?? "<Unknown Bot>"
-    let branchName = env[.XCS_PRIMARY_REPO_BRANCH] ?? "<unknown-branch>"
-    let revision = env[.XCS_PRIMARY_REPO_REVISION] ?? "<unknown-revision>"
+    username = botname
+
+    let branchName = env[.XCS_PRIMARY_REPO_BRANCH]
+    let revision = env[.XCS_PRIMARY_REPO_REVISION]
+    let tagName = env[.XCS_PRIMARY_REPO_TAG]
+    let scmString = tagName ?? revision ?? branchName ?? "<unknown-revision>"
     let result = env[.XCS_INTEGRATION_RESULT] ?? "<no-result>"
 
-    username = botname
-    let title = "\(botname) finished integration #\(env[.XCS_INTEGRATION_NUMBER] ?? "-") on `\(branchName)(\(revision))` with status: `\(env[.XCS_INTEGRATION_RESULT] ?? "-")`"
+    let title = "\(botname) finished integration #\(env[.XCS_INTEGRATION_NUMBER] ?? "-") on `\(scmString)` with status: `\(env[.XCS_INTEGRATION_RESULT] ?? "-")`"
 
     let titleLink: String? = {
       if let hostname = serverHostname, let botID = env[.XCS_BOT_ID], let integrationID = env[.XCS_INTEGRATION_ID] {

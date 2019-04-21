@@ -1,6 +1,3 @@
-// Copied by Stephan Diederich on 29.09.2018.
-// from https://gist.github.com/DougGregor/68259dd47d9711b27cbbfde3e89604e8
-
 import Foundation
 import Basic
 

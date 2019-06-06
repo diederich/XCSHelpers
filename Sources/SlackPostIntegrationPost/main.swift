@@ -2,7 +2,7 @@ import Darwin
 import Basic
 import XcodeServerHelpersKit
 import Foundation
-import Utility
+import SPMUtility
 
 // The first argument is always the executable, drop it
 let arguments = Array(ProcessInfo.processInfo.arguments.dropFirst())
@@ -28,9 +28,9 @@ public func processArguments(_ arguments: ArgumentParser.Result) throws {
     result = inResult
   }
 
-  let progressBar = createProgressBar(forStream: stdoutStream, header: "Posting to slack...")
+  let progressBar = PercentProgressAnimation(stream: stdoutStream, header: "Posting to slack...")
   _ = progress.observe(\Progress.fractionCompleted) { (progress, _) in
-    progressBar.update(percent: Int(progress.fractionCompleted * 100), text: "")
+    progressBar.update(step: Int(progress.fractionCompleted * 100), total: 100, text: "")
   }
   // wait for the request
   while (result == nil) { sleep(1) }

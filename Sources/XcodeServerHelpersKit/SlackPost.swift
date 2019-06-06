@@ -88,7 +88,7 @@ extension SlackPost {
       }
     }
     let fallbackMessage = """
-      Run \(env[.XCS_INTEGRATION_NUMBER] ?? "-") on `\(branchName)` finished with status: \(result).
+      Run \(env[.XCS_INTEGRATION_NUMBER] ?? "-") on `\(branchName ?? "-")` finished with status: \(result).
       \(text)
       """
 

@@ -2,12 +2,21 @@
   "object": {
     "pins": [
       {
+        "package": "llbuild",
+        "repositoryURL": "https://github.com/apple/swift-llbuild.git",
+        "state": {
+          "branch": "master",
+          "revision": "298cab8120fd75df6e6afe73d1ba3c3727ff90f8",
+          "version": null
+        }
+      },
+      {
         "package": "SwiftPM",
         "repositoryURL": "https://github.com/apple/swift-package-manager.git",
         "state": {
-          "branch": null,
-          "revision": "235aacc514cb81a6881364b0fedcb3dd083228f3",
-          "version": "0.3.0"
+          "branch": "master",
+          "revision": "c2dc30a5002c776d6137ed5e61dae2fed22ed2e9",
+          "version": null
         }
       }
     ]

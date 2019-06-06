@@ -17,7 +17,7 @@ let package = Package(
             dependencies: ["XcodeServerHelpersKit"]),
         .target(
           name: "XcodeServerHelpersKit",
-          dependencies: ["Utility"]),
+          dependencies: ["SPMUtility"]),
         .testTarget(
             name: "SlackPostIntegrationPostTests",
             dependencies: ["SlackPostIntegrationPost"]),

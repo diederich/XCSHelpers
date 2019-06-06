@@ -9,7 +9,7 @@ let package = Package(
       .executable(name: "SlackPostIntegrationPost", targets: ["SlackPostIntegrationPost"])
     ],
     dependencies: [
-      .package(url: "https://github.com/apple/swift-package-manager.git", from: "0.3.0"),
+      .package(url: "https://github.com/apple/swift-package-manager.git", .branch("master")),
     ],
     targets: [
         .target(

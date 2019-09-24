@@ -20,7 +20,7 @@ public struct EmptyResponse: APIResponse {}
 public class NetworkService {
   let session: URLSession = URLSession.shared
 
-  public func send<T: APIRequest>(_ apiRequest: T, completion: @escaping (Result<T.Response, XcodeServerHelpersError>) -> Void) -> Progress {
+  public func send<T: APIRequest>(_ apiRequest: T, completion: @escaping (Result<T.Response, XCSHelpersError>) -> Void) -> Progress {
     var urlRequest = URLRequest(url: apiRequest.url)
     urlRequest.httpMethod = apiRequest.method.rawValue
 
@@ -32,11 +32,11 @@ public class NetworkService {
 
     let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
       if let error = error {
-        completion(.failure(XcodeServerHelpersError.failedToCommunicateWithSlack(error: error.localizedDescription)))
+        completion(.failure(XCSHelpersError.failedToCommunicateWithSlack(error: error.localizedDescription)))
         return
       }
       guard let httpResponse = response as? HTTPURLResponse else {
-        completion(.failure(XcodeServerHelpersError.unknownError))
+        completion(.failure(XCSHelpersError.unknownError))
         return
       }
       var response: T.Response? = nil
@@ -49,13 +49,13 @@ public class NetworkService {
         print("Can't decode response")
       }
       guard (200...299).contains(httpResponse.statusCode) else {
-        completion(.failure(XcodeServerHelpersError.failedToCommunicateWithSlack(error: "Response: \(String(describing: response))")))
+        completion(.failure(XCSHelpersError.failedToCommunicateWithSlack(error: "Response: \(String(describing: response))")))
         return
       }
       if let response = response {
         completion(.success(response))
       } else {
-        completion(.failure(XcodeServerHelpersError.failedToCommunicateWithSlack(error: "Could not decode response")))
+        completion(.failure(XCSHelpersError.failedToCommunicateWithSlack(error: "Could not decode response")))
       }
     }
     task.resume()

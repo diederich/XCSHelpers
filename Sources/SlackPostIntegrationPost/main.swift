@@ -1,6 +1,6 @@
 import Darwin
 import Basic
-import XcodeServerHelpersKit
+import XCSHelpersKit
 import Foundation
 import SPMUtility
 
@@ -23,7 +23,7 @@ public func processArguments(_ arguments: ArgumentParser.Result) throws {
 
 
   let engine = NetworkService()
-  var result: Result<String, XcodeServerHelpersError>? = nil
+  var result: Result<String, XCSHelpersError>? = nil
   let progress = engine.send(request) { inResult in
     result = inResult
   }
@@ -38,7 +38,7 @@ public func processArguments(_ arguments: ArgumentParser.Result) throws {
   switch result {
   case .none:
     progressBar.complete(success: false)
-    throw XcodeServerHelpersError.unknownError
+    throw XCSHelpersError.unknownError
   case .failure(let error)?:
     progressBar.complete(success: false)
     throw error
@@ -53,13 +53,13 @@ do {
   if #available(OSX 10.13, *) {
     try processArguments(parsedArguments)
   } else {
-    throw XcodeServerHelpersError.unsupportedMacOSVersion
+    throw XCSHelpersError.unsupportedMacOSVersion
   }
 } catch let error as ArgumentParserError {
   fputs("Error: \(error.description)\n\n", stderr)
   parser.printUsage(on: stderrStream)
   exit(-2)
-} catch let error as XcodeServerHelpersError {
+} catch let error as XCSHelpersError {
   fputs("Error: \(error.localizedDescription)\n", stderr)
   exit(error.code)
 } catch let error {

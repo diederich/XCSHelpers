@@ -1,7 +1,7 @@
 import XCTest
 
-import XcodeServerHelpersTests
+import XCSHelpersTests
 
 var tests = [XCTestCaseEntry]()
-tests += XcodeServerHelpersTests.allTests()
+tests += XCSHelpersTests.allTests()
 XCTMain(tests)

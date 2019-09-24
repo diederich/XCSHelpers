@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "XcodeServerHelpers",
+    name: "XCSHelpers",
     platforms: [
       .macOS(.v10_13)
     ],
@@ -17,15 +17,15 @@ let package = Package(
     targets: [
         .target(
             name: "SlackPostIntegrationPost",
-            dependencies: ["XcodeServerHelpersKit"]),
+            dependencies: ["XCSHelpersKit"]),
         .target(
-          name: "XcodeServerHelpersKit",
+          name: "XCSHelpersKit",
           dependencies: ["SPMUtility"]),
         .testTarget(
             name: "SlackPostIntegrationPostTests",
             dependencies: ["SlackPostIntegrationPost"]),
         .testTarget(
-          name: "XcodeServerHelpersKitTests",
-          dependencies: ["XcodeServerHelpersKit"]),
+          name: "XCSHelpersKitTests",
+          dependencies: ["XCSHelpersKit"]),
     ]
 )

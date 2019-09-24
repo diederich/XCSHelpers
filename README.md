@@ -1,3 +1,4 @@
-# XcodeServerHelpers
+# XCSHelpers
 
-A description of this package.
+spm supported project providing helpers for working with Xcode server.
+

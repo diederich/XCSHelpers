@@ -28,11 +28,11 @@ extension SlackPost {
   /// - Parameters:
   ///   - env: Environmenet
   ///   - serverHostname: hostname of the server. If present, links can be added (like xcbot://hostname/...)
-  /// - Throws: XcodeServerHelpersError
+  /// - Throws: XCSHelpersError
   public init(xcodeServerEnvironment env: XcodeServerEnvironment,
               serverHostname: String? = nil) throws {
     guard env[.XCS] == "1" else {
-      throw XcodeServerHelpersError.notRunningOnXcodeServer
+      throw XCSHelpersError.notRunningOnXcodeServer
     }
     //TODO should the username be the 'server' and the author the bot?
     let botname = env[.XCS_BOT_NAME] ?? "<Unknown Bot>"

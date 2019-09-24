@@ -1,6 +1,6 @@
 import XCTest
 import class Foundation.Bundle
-@testable import XcodeServerHelpersKit
+@testable import XCSHelpersKit
 
 final class SlackPostTests: XCTestCase {
 

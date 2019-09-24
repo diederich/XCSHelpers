@@ -4,7 +4,7 @@
 
 import Foundation
 
-public enum XcodeServerHelpersError: Error {
+public enum XCSHelpersError: Error {
   case unsupportedMacOSVersion
   case notRunningOnXcodeServer
   case failedToCommunicateWithSlack(error: String?)
@@ -12,7 +12,7 @@ public enum XcodeServerHelpersError: Error {
   case unknownError
 }
 
-extension XcodeServerHelpersError: LocalizedError {
+extension XCSHelpersError: LocalizedError {
   /// A localized message describing what error occurred.
   public var errorDescription: String? {
     switch self {

@@ -1,5 +1,4 @@
 import Foundation
-import Basic
 
 public enum HTTPMethod: String {
   case post = "POST"
